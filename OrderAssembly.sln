@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{99E1F02A-E677-404C-B56B-120570D1620C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{66F473BC-3B15-45A7-8076-7CA2AF4C70E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTemplate", "ConsoleTemplate\ConsoleTemplate.csproj", "{8729837F-6D1E-4524-9559-FE7073B543BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8729837F-6D1E-4524-9559-FE7073B543BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8729837F-6D1E-4524-9559-FE7073B543BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8729837F-6D1E-4524-9559-FE7073B543BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8729837F-6D1E-4524-9559-FE7073B543BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66F473BC-3B15-45A7-8076-7CA2AF4C70E9} = {99E1F02A-E677-404C-B56B-120570D1620C}
+		{8729837F-6D1E-4524-9559-FE7073B543BD} = {66F473BC-3B15-45A7-8076-7CA2AF4C70E9}
+	EndGlobalSection
+EndGlobal

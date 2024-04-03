@@ -7,7 +7,7 @@ public class OrderProductShelf : BaseEntity
     public virtual Order Order { get; set; }
     public int OrderId { get; set; }
     
-    public virtual ProductShelf Product { get; set; }
+    public virtual ProductShelf ProductShelf { get; set; }
     public virtual int ProductId { get; set; }
     
     public ushort Count { get; set; }

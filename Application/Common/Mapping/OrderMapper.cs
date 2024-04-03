@@ -8,6 +8,7 @@ public class OrderMapper : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.ForType<Order, OrderDto>();
+        config.ForType<Order, OrderDto>()
+            .Map(destination => destination.OrderedByShelfProducts , source => source.OrderProductShelves);
     }
 }

@@ -20,7 +20,7 @@ public static class MethodExtensions
         string connectionString) =>
         serviceCollection.AddDbContext<ApplicationContext>(options =>
         {
-            options.UseSqlServer(connectionString,
+            options.UseNpgsql(connectionString,
                 migration => migration.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName));
             options.UseLazyLoadingProxies();
 

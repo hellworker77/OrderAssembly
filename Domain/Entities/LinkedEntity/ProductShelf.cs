@@ -10,5 +10,5 @@ public class ProductShelf : BaseEntity
     public int ShelfId { get; set; }
 
     public bool IsPriority { get; set; }
-    public virtual OrderProductShelf OrderProductShelf { get; set;  }
+    public virtual IList<OrderProductShelf> OrderProductShelves { get; set;  } 
 }

@@ -9,8 +9,8 @@ public class OrderProductShelfConfiguration : IEntityTypeConfiguration<OrderProd
     public void Configure(EntityTypeBuilder<OrderProductShelf> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.HasOne(x => x.Product)
-            .WithOne(x => x.OrderProductShelf)
-            .HasForeignKey<OrderProductShelf>(x => x.ProductId);
+        builder.HasOne(x => x.ProductShelf)
+            .WithMany(x => x.OrderProductShelves)
+            .HasForeignKey(x => x.ProductId);
     }
 }

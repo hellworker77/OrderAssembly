@@ -84,7 +84,7 @@ public static class FakeData
         new Product()
         {
             Id = 6,
-            Name = "Микрофон "
+            Name = "Микрофон"
         },
     };
 

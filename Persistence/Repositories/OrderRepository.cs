@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces.Repositories;
 using Domain.Entities;
+using Domain.Entities.LinkedEntity;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts;
 
@@ -18,5 +19,11 @@ public class OrderRepository : IOrderRepository
         _context.Set<Order>()
             .AsNoTracking()
             .Where(x => ids.Contains(x.Id))
+            .Include(order=>order.OrderProductShelves)
+            .ThenInclude(orderProductShelves=>orderProductShelves.ProductShelf)
+            .ThenInclude(productShelf=>productShelf.Product)
+            .Include(order=>order.OrderProductShelves)
+            .ThenInclude(orderProductShelves=>orderProductShelves.ProductShelf)
+            .ThenInclude(productShelf=>productShelf.Shelf)
             .ToList();
 }

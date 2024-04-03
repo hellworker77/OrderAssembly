@@ -10,10 +10,12 @@ public class AssembledShelfMapper : IRegister
     {
         config.ForType<OrderProductShelf, AssembledShelfDto>()
             .Map(destination => destination.ShelfName,
-                source => source.Product.Shelf.Name)
+                source => source.ProductShelf.Shelf.Name)
+            .Map(destination => destination.IsPriority,
+                source => source.ProductShelf.IsPriority)
             .Map(destination => destination.Product.Count, source => source.Count)
             .Map(destination => destination.Product.OrderId, source => source.OrderId)
-            .Map(destination => destination.Product, source => source.Product);
+            .Map(destination => destination.Product, source => source.ProductShelf);
 
     }
 }

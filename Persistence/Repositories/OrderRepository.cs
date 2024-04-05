@@ -15,15 +15,60 @@ public class OrderRepository : IOrderRepository
         _context = context;
     }
 
-    public IList<Order> GetOrdersByIds(params int[] ids) =>
-        _context.Set<Order>()
-            .AsNoTracking()
+    public IList<Order> GetOrdersByIds(params int[] ids) 
+    {
+        var orders = _context.Set<Order>()
             .Where(x => ids.Contains(x.Id))
-            .Include(order=>order.OrderProductShelves)
-            .ThenInclude(orderProductShelves=>orderProductShelves.ProductShelf)
-            .ThenInclude(productShelf=>productShelf.Product)
-            .Include(order=>order.OrderProductShelves)
-            .ThenInclude(orderProductShelves=>orderProductShelves.ProductShelf)
-            .ThenInclude(productShelf=>productShelf.Shelf)
             .ToList();
+        
+        var orderIds = orders.Select(order => order.Id).ToList();
+        var orderProductShelves = _context.Set<OrderProductShelf>()
+            .Where(orderProductShelf => orderIds.Contains(orderProductShelf.OrderId))
+            .ToList();
+
+        var productShelfIds = orderProductShelves.Select(x => x.ProductId).ToList();
+        
+        var productShelves = _context.Set<ProductShelf>()
+            .Where(productShelf => productShelfIds.Contains(productShelf.Id))
+            .ToList();
+
+        var shelfIds = productShelves.Select(x => x.ShelfId).ToList();
+
+        var shelves = _context.Set<Shelf>()
+            .Where(shelf => shelfIds.Contains(shelf.Id))
+            .ToList();
+
+        var productIds = productShelves.Select(x => x.ProductId).ToList();
+
+        var products = _context.Set<Product>()
+            .Where(product => productIds.Contains(product.Id))
+            .ToList();
+        
+        
+        foreach (var order in orders)
+        {
+            order.OrderProductShelves = orderProductShelves
+                .Where(orderProductShelf => orderProductShelf.OrderId == order.Id)
+                .Select(orderProductShelf => new OrderProductShelf()
+                {
+                    OrderId = orderProductShelf.Id,
+                    Count = orderProductShelf.Count,
+                    ProductShelf = productShelves
+                        .Where(x=>x.Id == orderProductShelf.ProductId)
+                        .Select(productShelf => new ProductShelf()
+                        {
+                            ProductId = productShelf.ProductId,
+                            ShelfId = productShelf.ShelfId,
+                            Shelf = shelves.First(x=>x.Id == productShelf.ShelfId),
+                            Product = products.First(x=>x.Id == productShelf.ProductId),
+                            IsPriority = productShelf.IsPriority
+                        })
+                        .First()
+                })
+                .ToList();
+        }
+
+        return orders;
+        
+    }
 }

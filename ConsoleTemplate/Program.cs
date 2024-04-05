@@ -22,8 +22,7 @@ services
 var provider = services.BuildServiceProvider();
 
 var orderService = provider.GetService<IOrderService>();
-
-var productViews = orderService.GetOrdersByIds(Environment.GetCommandLineArgs()[1]);
+var productViews = orderService.GetOrdersByIds(args[0]);
 
 PrintProductViews(productViews);
 

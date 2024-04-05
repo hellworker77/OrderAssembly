@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -84,8 +84,7 @@ namespace Persistence.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     OrderId = table.Column<int>(type: "integer", nullable: false),
                     ProductId = table.Column<int>(type: "integer", nullable: false),
-                    Count = table.Column<int>(type: "integer", nullable: false),
-                    OrderId1 = table.Column<int>(type: "integer", nullable: true)
+                    Count = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,11 +95,6 @@ namespace Persistence.Migrations
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderProductShelves_Orders_OrderId1",
-                        column: x => x.OrderId1,
-                        principalTable: "Orders",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_OrderProductShelves_ProductShelves_ProductId",
                         column: x => x.ProductId,
@@ -113,12 +107,6 @@ namespace Persistence.Migrations
                 name: "IX_OrderProductShelves_OrderId",
                 table: "OrderProductShelves",
                 column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderProductShelves_OrderId1",
-                table: "OrderProductShelves",
-                column: "OrderId1",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderProductShelves_ProductId",
